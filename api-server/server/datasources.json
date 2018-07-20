@@ -1,0 +1,13 @@
+{
+  "composer": {
+    "name": "composer",
+    "connector": "loopback-connector-composer",
+    "card": "admin@coin-marketplace",
+    "namespaces": false
+  },
+  "db": {
+    "name": "db",
+    "connector": "mongodb",
+    "host": "127.0.0.1"
+  }
+}

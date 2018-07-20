@@ -1,0 +1,45 @@
+{
+  "name": "Coin",
+  "description": "An asset named Coin",
+  "plural": "Coin",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "asset",
+      "namespace": "net.aidin.marketplace",
+      "name": "Coin",
+      "fqn": "net.aidin.marketplace.Coin",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "net.aidin.marketplace.Coin",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "coinId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "owner": {
+      "type": "any",
+      "description": "The identifier of an instance of owner",
+      "required": true
+    },
+    "issuer": {
+      "type": "any",
+      "description": "The identifier of an instance of issuer",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

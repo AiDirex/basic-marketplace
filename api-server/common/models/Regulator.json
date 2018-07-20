@@ -1,0 +1,43 @@
+{
+  "name": "Regulator",
+  "description": "A participant named Regulator",
+  "plural": "Regulator",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "participant",
+      "namespace": "net.aidin.marketplace",
+      "name": "Regulator",
+      "fqn": "net.aidin.marketplace.Regulator",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "net.aidin.marketplace.Regulator",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "regulatorId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

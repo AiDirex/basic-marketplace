@@ -1,0 +1,6 @@
+node_modules
+/dist
+*.card
+.env
+.idea
+providers.json

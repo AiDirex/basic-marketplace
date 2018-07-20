@@ -1,0 +1,40 @@
+{
+  "name": "PersonInfo",
+  "description": "A concept named PersonInfo",
+  "plural": "PersonInfo",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "concept",
+      "namespace": "net.aidin.marketplace",
+      "name": "PersonInfo",
+      "fqn": "net.aidin.marketplace.PersonInfo",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "net.aidin.marketplace.PersonInfo",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

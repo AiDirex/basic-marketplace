@@ -1,0 +1,57 @@
+{
+  "name": "CoinOffer",
+  "description": "An asset named CoinOffer",
+  "plural": "CoinOffer",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "asset",
+      "namespace": "net.aidin.marketplace",
+      "name": "CoinOffer",
+      "fqn": "net.aidin.marketplace.CoinOffer",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "net.aidin.marketplace.CoinOffer",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "coinOfferId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "NEW",
+        "SOLD"
+      ],
+      "required": true
+    },
+    "coin": {
+      "type": "any",
+      "description": "The identifier of an instance of coin",
+      "required": true
+    },
+    "owner": {
+      "type": "any",
+      "description": "The identifier of an instance of owner",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

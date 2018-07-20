@@ -1,0 +1,49 @@
+{
+  "engines": {
+    "composer": "^0.19.12"
+  },
+  "name": "coin-marketplace",
+  "version": "0.0.1",
+  "description": "A regulated blockchain based coin marketplace",
+  "scripts": {
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/coin-marketplace@0.0.1.bna",
+    "pretest": "npm run lint",
+    "lint": "eslint .",
+    "test": "nyc mocha -t 0 test/*.js && cucumber-js",
+    "install-net": "composer network install --card PeerAdmin@hlfv1 --archiveFile ./dist/coin-marketplace@0.0.1.bna",
+    "start-net": "composer network start --networkName coin-marketplace --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card",
+    "upgrade-net": "composer network upgrade -c PeerAdmin@hlfv1 -n coin-marketplace -V 0.0.2",
+    "ping": "composer network ping --card admin@coin-marketplace",
+    "rest-server": "composer-rest-server -c admin@coin-marketplace -n never -w true",
+    "gen-ui": "yo hyperledger-composer:angular",
+    "import-card": "composer card import --file networkadmin.card",
+    "delete-card": "composer card delete -c admin@coin-marketplace",
+    "start": "~/fabric-dev-servers/startFabric.sh && npm run delete-card && npm run install-net && npm run start-net && npm run import-card && npm run ping",
+    "stop": "~/fabric-dev-servers/stopFabric.sh"
+  },
+  "keywords": [
+    "composer",
+    "composer-network"
+  ],
+  "author": "Aidin Rasti",
+  "email": "aidin.rasti@gmail.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "chai": "latest",
+    "chai-as-promised": "latest",
+    "composer-admin": "^0.19.12",
+    "composer-cli": "^0.19.12",
+    "composer-client": "^0.19.12",
+    "composer-common": "^0.19.12",
+    "composer-connector-embedded": "^0.19.12",
+    "composer-cucumber-steps": "^0.19.12",
+    "cucumber": "^2.2.0",
+    "eslint": "latest",
+    "mkdirp": "^0.5.1",
+    "mocha": "latest",
+    "nyc": "latest"
+  },
+  "dependencies": {
+    "eslint-config-loopback": "^11.0.0"
+  }
+}

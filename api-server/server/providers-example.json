@@ -1,0 +1,32 @@
+{
+    "local": {
+        "provider": "local",
+        "module": "passport-local",
+        "usernameField": "username",
+        "passwordField": "password",
+        "authPath": "/auth/local",
+        "successRedirect": "/",
+        "failureRedirect": "/"
+    },
+    "google": {
+        "provider": "google",
+        "module": "passport-google-oauth2",
+        "clientID": "clientID",
+        "clientSecret": "clientSecret",
+        "authPath": "/auth/google",
+        "callbackURL": "http://localhost:4200/auth/google/callback",
+        "scope": "https://www.googleapis.com/auth/plus.login",
+        "successRedirect": "/",
+        "failureRedirect": "/"
+    },
+    "github": {
+        "provider": "github",
+        "module": "passport-github",
+        "clientID": "clientID",
+        "clientSecret": "clientSecret",
+        "authPath": "/auth/github",
+        "callbackURL": "http://localhost:4200/auth/github/callback",
+        "successRedirect": "/",
+        "failureRedirect": "/"
+    }
+}

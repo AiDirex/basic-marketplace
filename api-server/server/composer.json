@@ -1,0 +1,13 @@
+{
+  "connectionProfileName": "admin@coin-marketplace",
+  "businessNetworkIdentifier": "net.aidin.marketplace",
+  "participantId": "admin",
+  "participantPwd": "adminpw",
+  "namespaces": "never",
+  "port": 3000,
+  "authentication": true,
+  "multiuser": true,
+  "websockets": true,
+  "tls": false,
+  "card": "admin@coin-marketplace"
+}
