@@ -38,7 +38,7 @@ function registerQueryMethod(app, dataSource, Query, connector, query, namespace
     query.getSelect().getResource() :
     ModelUtil.getShortName(query.getSelect().getResource());
 
-    // declare the arguments to the query method
+  // declare the arguments to the query method
   let accepts = [];
 
   // we need the HTTP request so we can get the named parameters off the query string
@@ -49,7 +49,12 @@ function registerQueryMethod(app, dataSource, Query, connector, query, namespace
   // will generate the web form to enter them
   for (let n = 0; n < parameters.length; n++) {
     const param = parameters[n];
-    accepts.push({arg: param.name, type: LoopbackVisitor.toLoopbackType(param.type), required: true, http: {verb: 'get', source: 'query'}});
+    accepts.push({
+      arg: param.name,
+      type: LoopbackVisitor.toLoopbackType(param.type),
+      required: true,
+      http: {verb: 'get', source: 'query'},
+    });
   }
 
   // Define and register dynamic query method
@@ -494,6 +499,9 @@ function generateModelSchemas(dataSource, modelDefinitions) {
         dataSource.discoverSchemas(modelDefinition.name, {visited: {}, associations: true}, (error, modelSchema) => {
           if (error) {
             return reject(error);
+          }
+          if (modelSchema.name === 'Member') {
+            modelSchema.properties.brokers.required = false;
           }
           modelSchemas.push(modelSchema);
           resolve(modelSchemas);

@@ -130,9 +130,9 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button (click)="updateParticipant(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">
-						Submit
-					</button>
+					<!--<button (click)="updateParticipant(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">-->
+						<!--Submit-->
+					<!--</button>-->
 				</div>
 			</form>
 		</div>
@@ -201,6 +201,8 @@
 
 					<th class="info">phone</th>
 
+					<th class="info">Brokers</th>
+
 					<th class="info-actions">Actions</th>
 				</tr>
 				</thead>
@@ -215,8 +217,10 @@
 
 					<td class="participant-properties">{{participant.info.phone}}</td>
 
+					<td class="participant-properties">{{participant.brokers}}</td>
+
 					<td>
-						<button (click)="issueID(participant.brokerId);" type="button" class="btn btn-update">
+						<button (click)="issueID(participant.nationalId);" type="button" class="btn btn-update">
 							Issue ID
 						</button>
 						<!-- <button (click)="revokeID(participant.brokerId);" type="button" class="btn btn-update">

@@ -33,15 +33,13 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
   private errorMessage;
 
   member = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
+  // transactionId = new FormControl('', Validators.required);
+  // timestamp = new FormControl('', Validators.required);
 
 
   constructor(private serviceRemoveMemberFromBroker: RemoveMemberFromBrokerService, fb: FormBuilder) {
     this.myForm = fb.group({
-      member: this.member,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+      member: this.member
     });
   };
 
@@ -99,15 +97,11 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
       $class: 'net.aidin.marketplace.RemoveMemberFromBroker',
-      'member': this.member.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
+			'member': `net.aidin.marketplace.Member#${this.member.value}`
     };
 
     this.myForm.setValue({
-      'member': null,
-      'transactionId': null,
-      'timestamp': null
+      'member': null
     });
 
     return this.serviceRemoveMemberFromBroker.addTransaction(this.Transaction)
@@ -115,10 +109,9 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
-        'member': null,
-        'transactionId': null,
-        'timestamp': null
+        'member': null
       });
+			this.loadAll();
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -128,47 +121,45 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
       }
     });
   }
+  //
+  // updateTransaction(form: any): Promise<any> {
+  //   this.Transaction = {
+  //     $class: 'net.aidin.marketplace.RemoveMemberFromBroker'
+  //   };
+  //
+  //   return this.serviceRemoveMemberFromBroker.updateTransaction(form.get('transactionId').value, this.Transaction)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //     this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
-  updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'net.aidin.marketplace.RemoveMemberFromBroker',
-      'member': this.member.value,
-      'timestamp': this.timestamp.value
-    };
-
-    return this.serviceRemoveMemberFromBroker.updateTransaction(form.get('transactionId').value, this.Transaction)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
-
-  deleteTransaction(): Promise<any> {
-
-    return this.serviceRemoveMemberFromBroker.deleteTransaction(this.currentId)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
+  // deleteTransaction(): Promise<any> {
+  //
+  //   return this.serviceRemoveMemberFromBroker.deleteTransaction(this.currentId)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //       this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
   setId(id: any): void {
     this.currentId = id;
@@ -181,27 +172,13 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
-        'member': null,
-        'transactionId': null,
-        'timestamp': null
+        'member': null
       };
 
       if (result.member) {
         formObject.member = result.member;
       } else {
         formObject.member = null;
-      }
-
-      if (result.transactionId) {
-        formObject.transactionId = result.transactionId;
-      } else {
-        formObject.transactionId = null;
-      }
-
-      if (result.timestamp) {
-        formObject.timestamp = result.timestamp;
-      } else {
-        formObject.timestamp = null;
       }
 
       this.myForm.setValue(formObject);
@@ -220,9 +197,7 @@ export class RemoveMemberFromBrokerComponent implements OnInit {
 
   resetForm(): void {
     this.myForm.setValue({
-      'member': null,
-      'transactionId': null,
-      'timestamp': null
+      'member': null
     });
   }
 }

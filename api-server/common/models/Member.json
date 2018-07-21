@@ -40,7 +40,7 @@
         "any"
       ],
       "description": "The identifier of an instance of brokers",
-      "required": true
+      "required": false
     }
   },
   "validations": [],

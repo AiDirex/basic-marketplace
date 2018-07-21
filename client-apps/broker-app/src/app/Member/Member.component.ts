@@ -17,6 +17,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {MemberService} from './Member.service';
 import 'rxjs/add/operator/toPromise';
 import * as FileSaver from 'file-saver';
+import {Member} from "../net.aidin.marketplace";
 
 @Component({
 	selector: 'app-member',
@@ -32,6 +33,7 @@ export class MemberComponent implements OnInit {
 	private participant;
 	private currentId;
 	private errorMessage;
+	private currentMember: Member;
 
 	nationalId = new FormControl('', Validators.required);
 	firstName = new FormControl('', Validators.required);
@@ -108,7 +110,8 @@ export class MemberComponent implements OnInit {
 				'firstName': this.firstName.value,
 				'lastName': this.lastName.value,
 				'phone': this.phone.value
-			}
+			},
+			brokers: []
 		};
 
 		this.myForm.setValue({
@@ -124,8 +127,9 @@ export class MemberComponent implements OnInit {
 				this.errorMessage = null;
 				this.myForm.setValue({
 					'nationalId': null,
-					'balance': null,
-					'info': null
+					'phone': null,
+					'lastName': null,
+					'firstName': null
 				});
 				this.loadAll();
 			})
@@ -142,9 +146,14 @@ export class MemberComponent implements OnInit {
 	updateParticipant(form: any): Promise<any> {
 		this.participant = {
 			$class: 'net.aidin.marketplace.Member',
-			'firstName': this.firstName.value,
-			'lastName': this.lastName.value,
-			'phone': this.phone.value
+			balance: this.currentMember.balance,
+			brokers: this.currentMember.brokers,
+			'info': {
+				$class: 'net.aidin.marketplace.PersonInfo',
+				'firstName': this.firstName.value,
+				'lastName': this.lastName.value,
+				'phone': this.phone.value
+			}
 		};
 
 		return this.serviceMember.updateParticipant(form.get('nationalId').value, this.participant)
@@ -200,6 +209,7 @@ export class MemberComponent implements OnInit {
 					'lastName': null,
 					'phone': null
 				};
+				this.currentMember = result
 
 				if (result.nationalId) {
 					formObject.nationalId = result.nationalId;
@@ -251,9 +261,8 @@ export class MemberComponent implements OnInit {
 	issueID(id: any){
 		return this.serviceMember.issueID(id).toPromise()
 			.then((res: any) => {
-				console.log(res.blob())
 				var blob = new Blob([res.blob()], {type: "application/octet-stream"});
-				FileSaver.saveAs(blob, `${id}.card`);
+				FileSaver.saveAs(blob, `member-${id}.card`);
 			}).catch((error) => {
 				if (error === 'Server error') {
 					this.errorMessage = 'Could not connect to REST server. Please check your configuration details';

@@ -34,16 +34,12 @@ export class ChargeMemberBalanceComponent implements OnInit {
 
   member = new FormControl('', Validators.required);
   amount = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
 
 
   constructor(private serviceChargeMemberBalance: ChargeMemberBalanceService, fb: FormBuilder) {
     this.myForm = fb.group({
       member: this.member,
-      amount: this.amount,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
+      amount: this.amount
     });
   };
 
@@ -101,17 +97,13 @@ export class ChargeMemberBalanceComponent implements OnInit {
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
       $class: 'net.aidin.marketplace.ChargeMemberBalance',
-      'member': this.member.value,
-      'amount': this.amount.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
+      'member': `resource:net.aidin.marketplace.Member#${this.member.value}`,
+      'amount': this.amount.value
     };
 
     this.myForm.setValue({
       'member': null,
-      'amount': null,
-      'transactionId': null,
-      'timestamp': null
+      'amount': null
     });
 
     return this.serviceChargeMemberBalance.addTransaction(this.Transaction)
@@ -120,10 +112,9 @@ export class ChargeMemberBalanceComponent implements OnInit {
       this.errorMessage = null;
       this.myForm.setValue({
         'member': null,
-        'amount': null,
-        'transactionId': null,
-        'timestamp': null
+        'amount': null
       });
+      this.loadAll()
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -134,109 +125,92 @@ export class ChargeMemberBalanceComponent implements OnInit {
     });
   }
 
-  updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'net.aidin.marketplace.ChargeMemberBalance',
-      'member': this.member.value,
-      'amount': this.amount.value,
-      'timestamp': this.timestamp.value
-    };
+  // updateTransaction(form: any): Promise<any> {
+  //   this.Transaction = {
+  //     $class: 'net.aidin.marketplace.ChargeMemberBalance',
+  //     'member': this.member.value,
+  //     'amount': this.amount.value
+  //   };
+  //
+  //   return this.serviceChargeMemberBalance.updateTransaction(form.get('transactionId').value, this.Transaction)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //     this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
-    return this.serviceChargeMemberBalance.updateTransaction(form.get('transactionId').value, this.Transaction)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
-
-  deleteTransaction(): Promise<any> {
-
-    return this.serviceChargeMemberBalance.deleteTransaction(this.currentId)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
+  // deleteTransaction(): Promise<any> {
+  //
+  //   return this.serviceChargeMemberBalance.deleteTransaction(this.currentId)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //       this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
   setId(id: any): void {
     this.currentId = id;
   }
 
-  getForm(id: any): Promise<any> {
-
-    return this.serviceChargeMemberBalance.getTransaction(id)
-    .toPromise()
-    .then((result) => {
-      this.errorMessage = null;
-      const formObject = {
-        'member': null,
-        'amount': null,
-        'transactionId': null,
-        'timestamp': null
-      };
-
-      if (result.member) {
-        formObject.member = result.member;
-      } else {
-        formObject.member = null;
-      }
-
-      if (result.amount) {
-        formObject.amount = result.amount;
-      } else {
-        formObject.amount = null;
-      }
-
-      if (result.transactionId) {
-        formObject.transactionId = result.transactionId;
-      } else {
-        formObject.transactionId = null;
-      }
-
-      if (result.timestamp) {
-        formObject.timestamp = result.timestamp;
-      } else {
-        formObject.timestamp = null;
-      }
-
-      this.myForm.setValue(formObject);
-
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
+  // getForm(id: any): Promise<any> {
+  //
+  //   return this.serviceChargeMemberBalance.getTransaction(id)
+  //   .toPromise()
+  //   .then((result) => {
+  //     this.errorMessage = null;
+  //     const formObject = {
+  //       'member': null,
+  //       'amount': null
+  //     };
+  //
+  //     if (result.member) {
+  //       formObject.member = result.member;
+  //     } else {
+  //       formObject.member = null;
+  //     }
+  //
+  //     if (result.amount) {
+  //       formObject.amount = result.amount;
+  //     } else {
+  //       formObject.amount = null;
+  //     }
+  //
+  //     this.myForm.setValue(formObject);
+  //
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //     this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
   resetForm(): void {
     this.myForm.setValue({
       'member': null,
-      'amount': null,
-      'transactionId': null,
-      'timestamp': null
+      'amount': null
     });
   }
 }

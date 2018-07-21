@@ -65,6 +65,14 @@ rule RegulatorAll {
 rule ParticipantTransaction {
     description: "Brokers can create member"
     participant: "org.hyperledger.composer.system.Participant"
+    operation: CREATE
+    resource: "org.hyperledger.composer.system.Transaction"
+    action: ALLOW
+}
+
+rule RegulatorTransaction {
+    description: "Brokers can create member"
+    participant: "net.aidin.marketplace.Regulator"
     operation: CREATE, READ
     resource: "org.hyperledger.composer.system.Transaction"
     action: ALLOW
@@ -269,5 +277,70 @@ rule MemberBuyCoin3 {
     resource(mo): "net.aidin.marketplace.Member"
     transaction(tx): "net.aidin.marketplace.BuyCoinFromMember"
     condition: (m.balance > tx.offer.price && (m.getFullyQualifiedIdentifier() === mo.getFullyQualifiedIdentifier() || mo.getFullyQualifiedIdentifier() === tx.offer.owner.getFullyQualifiedIdentifier()))
+    action: ALLOW
+}
+
+
+
+rule BrokerBuyCoinFromMember {
+    description: "Brokers can create member"
+    participant: "net.aidin.marketplace.Broker"
+    operation: ALL
+    resource: "net.aidin.marketplace.BuyCoinFromMember"
+    action: DENY
+}
+
+
+rule MemberSellCoinToMember{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.SellCoinToMember"
+    condition: (tx.member.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
+    action: ALLOW
+}
+
+rule MemberBuyCoinOffer{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.BuyCoinFromMember"
+    condition: (tx.offer.owner.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
+    action: ALLOW
+}
+
+rule MemberChargeMemberBalance{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.ChargeMemberBalance"
+    condition: (tx.member.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
+    action: ALLOW
+}
+
+rule MemberRegisterMemberToBroker{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.RegisterMemberToBroker"
+    condition: (tx.member.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
+    action: ALLOW
+}
+
+rule MemberRemoveMemberFromBroker{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.RemoveMemberFromBroker"
+    condition: (tx.member.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
+    action: ALLOW
+}
+
+rule MemberWithdrawMemberBalance{
+    description: "Brokers can create member"
+    participant(m): "net.aidin.marketplace.Member"
+    operation: READ
+    resource(tx): "net.aidin.marketplace.WithdrawMemberBalance"
+    condition: (tx.member.getFullyQualifiedIdentifier() === m.getFullyQualifiedIdentifier())
     action: ALLOW
 }

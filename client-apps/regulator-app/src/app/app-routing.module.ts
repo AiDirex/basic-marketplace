@@ -25,13 +25,13 @@ import { BrokerComponent } from './Broker/Broker.component';
 import { RegulatorComponent } from './Regulator/Regulator.component';
 import { MemberComponent } from './Member/Member.component';
 
-import { SellCoinToMemberComponent } from './SellCoinToMember/SellCoinToMember.component';
-import { BuyCoinFromMemberComponent } from './BuyCoinFromMember/BuyCoinFromMember.component';
-import { ChargeMemberBalanceComponent } from './ChargeMemberBalance/ChargeMemberBalance.component';
-import { WithdrawMemberBalanceComponent } from './WithdrawMemberBalance/WithdrawMemberBalance.component';
-import { RegisterMemberToBrokerComponent } from './RegisterMemberToBroker/RegisterMemberToBroker.component';
-import { RemoveMemberFromBrokerComponent } from './RemoveMemberFromBroker/RemoveMemberFromBroker.component';
 import {HistoryComponent} from "./History/History.component";
+import {SellCoinToMemberComponent} from "./SellCoinToMember/SellCoinToMember.component";
+import {ChargeMemberBalanceComponent} from "./ChargeMemberBalance/ChargeMemberBalance.component";
+import {WithdrawMemberBalanceComponent} from "./WithdrawMemberBalance/WithdrawMemberBalance.component";
+import {RegisterMemberToBrokerComponent} from "./RegisterMemberToBroker/RegisterMemberToBroker.component";
+import {RemoveMemberFromBrokerComponent} from "./RemoveMemberFromBroker/RemoveMemberFromBroker.component";
+import {BuyCoinFromMemberComponent} from "./BuyCoinFromMember/BuyCoinFromMember.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,13 +40,13 @@ const routes: Routes = [
   { path: 'Broker', component: BrokerComponent },
   { path: 'Regulator', component: RegulatorComponent },
   { path: 'Member', component: MemberComponent },
-  { path: 'SellCoinToMember', component: SellCoinToMemberComponent },
-  { path: 'BuyCoinFromMember', component: BuyCoinFromMemberComponent },
-  { path: 'ChargeMemberBalance', component: ChargeMemberBalanceComponent },
-  { path: 'WithdrawMemberBalance', component: WithdrawMemberBalanceComponent },
-  { path: 'RegisterMemberToBroker', component: RegisterMemberToBrokerComponent },
-  { path: 'RemoveMemberFromBroker', component: RemoveMemberFromBrokerComponent },
   { path: 'Wallet', component: WalletComponent },
+	{ path: 'SellCoinToMember', component: SellCoinToMemberComponent },
+	{ path: 'ChargeMemberBalance', component: ChargeMemberBalanceComponent },
+	{ path: 'WithdrawMemberBalance', component: WithdrawMemberBalanceComponent },
+	{ path: 'RegisterMemberToBroker', component: RegisterMemberToBrokerComponent },
+	{ path: 'RemoveMemberFromBroker', component: RemoveMemberFromBrokerComponent },
+	{ path: 'BuyCoinFromMember', component: BuyCoinFromMemberComponent },
   { path: 'History', component: HistoryComponent},
   { path: '**', redirectTo: '' }
 ];

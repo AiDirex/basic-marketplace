@@ -35,8 +35,6 @@ export class SellCoinToMemberComponent implements OnInit {
   member = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
   id = new FormControl('', Validators.required);
-  transactionId = new FormControl('', Validators.required);
-  timestamp = new FormControl('', Validators.required);
 
 
   constructor(private serviceSellCoinToMember: SellCoinToMemberService, fb: FormBuilder) {
@@ -44,8 +42,6 @@ export class SellCoinToMemberComponent implements OnInit {
       member: this.member,
       price: this.price,
       id: this.id,
-      transactionId: this.transactionId,
-      timestamp: this.timestamp
     });
   };
 
@@ -103,19 +99,15 @@ export class SellCoinToMemberComponent implements OnInit {
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
       $class: 'net.aidin.marketplace.SellCoinToMember',
-      'member': this.member.value,
+      'member': `resource:net.aidin.marketplace.Member#${this.member.value}`,
       'price': this.price.value,
       'id': this.id.value,
-      'transactionId': this.transactionId.value,
-      'timestamp': this.timestamp.value
     };
 
     this.myForm.setValue({
       'member': null,
       'price': null,
       'id': null,
-      'transactionId': null,
-      'timestamp': null
     });
 
     return this.serviceSellCoinToMember.addTransaction(this.Transaction)
@@ -126,9 +118,8 @@ export class SellCoinToMemberComponent implements OnInit {
         'member': null,
         'price': null,
         'id': null,
-        'transactionId': null,
-        'timestamp': null
       });
+      this.loadAll()
     })
     .catch((error) => {
       if (error === 'Server error') {
@@ -139,118 +130,101 @@ export class SellCoinToMemberComponent implements OnInit {
     });
   }
 
-  updateTransaction(form: any): Promise<any> {
-    this.Transaction = {
-      $class: 'net.aidin.marketplace.SellCoinToMember',
-      'member': this.member.value,
-      'price': this.price.value,
-      'id': this.id.value,
-      'timestamp': this.timestamp.value
-    };
-
-    return this.serviceSellCoinToMember.updateTransaction(form.get('transactionId').value, this.Transaction)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
-
-  deleteTransaction(): Promise<any> {
-
-    return this.serviceSellCoinToMember.deleteTransaction(this.currentId)
-    .toPromise()
-    .then(() => {
-      this.errorMessage = null;
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-        this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
+  // updateTransaction(form: any): Promise<any> {
+  //   this.Transaction = {
+  //     $class: 'net.aidin.marketplace.SellCoinToMember',
+  //     'member': this.member.value,
+  //     'price': this.price.value,
+  //     'id': this.id.value,
+  //   };
+  //
+  //   return this.serviceSellCoinToMember.updateTransaction(form.get('transactionId').value, this.Transaction)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //     this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
+  //
+  // deleteTransaction(): Promise<any> {
+  //
+  //   return this.serviceSellCoinToMember.deleteTransaction(this.currentId)
+  //   .toPromise()
+  //   .then(() => {
+  //     this.errorMessage = null;
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //       this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
   setId(id: any): void {
     this.currentId = id;
   }
 
-  getForm(id: any): Promise<any> {
-
-    return this.serviceSellCoinToMember.getTransaction(id)
-    .toPromise()
-    .then((result) => {
-      this.errorMessage = null;
-      const formObject = {
-        'member': null,
-        'price': null,
-        'id': null,
-        'transactionId': null,
-        'timestamp': null
-      };
-
-      if (result.member) {
-        formObject.member = result.member;
-      } else {
-        formObject.member = null;
-      }
-
-      if (result.price) {
-        formObject.price = result.price;
-      } else {
-        formObject.price = null;
-      }
-
-      if (result.id) {
-        formObject.id = result.id;
-      } else {
-        formObject.id = null;
-      }
-
-      if (result.transactionId) {
-        formObject.transactionId = result.transactionId;
-      } else {
-        formObject.transactionId = null;
-      }
-
-      if (result.timestamp) {
-        formObject.timestamp = result.timestamp;
-      } else {
-        formObject.timestamp = null;
-      }
-
-      this.myForm.setValue(formObject);
-
-    })
-    .catch((error) => {
-      if (error === 'Server error') {
-        this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
-      } else if (error === '404 - Not Found') {
-      this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
-      } else {
-        this.errorMessage = error;
-      }
-    });
-  }
+  // getForm(id: any): Promise<any> {
+  //
+  //   return this.serviceSellCoinToMember.getTransaction(id)
+  //   .toPromise()
+  //   .then((result) => {
+  //     this.errorMessage = null;
+  //     const formObject = {
+  //       'member': null,
+  //       'price': null,
+  //       'id': null,
+  //     };
+  //
+  //     if (result.member) {
+  //       formObject.member = result.member;
+  //     } else {
+  //       formObject.member = null;
+  //     }
+  //
+  //     if (result.price) {
+  //       formObject.price = result.price;
+  //     } else {
+  //       formObject.price = null;
+  //     }
+  //
+  //     if (result.id) {
+  //       formObject.id = result.id;
+  //     } else {
+  //       formObject.id = null;
+  //     }
+  //
+  //     this.myForm.setValue(formObject);
+  //
+  //   })
+  //   .catch((error) => {
+  //     if (error === 'Server error') {
+  //       this.errorMessage = 'Could not connect to REST server. Please check your configuration details';
+  //     } else if (error === '404 - Not Found') {
+  //     this.errorMessage = '404 - Could not find API route. Please check your available APIs.';
+  //     } else {
+  //       this.errorMessage = error;
+  //     }
+  //   });
+  // }
 
   resetForm(): void {
     this.myForm.setValue({
       'member': null,
       'price': null,
       'id': null,
-      'transactionId': null,
-      'timestamp': null
     });
   }
 }

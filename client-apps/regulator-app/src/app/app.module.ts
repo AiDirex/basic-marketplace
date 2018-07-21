@@ -29,13 +29,13 @@ import { BrokerComponent } from './Broker/Broker.component';
 import { RegulatorComponent } from './Regulator/Regulator.component';
 import { MemberComponent } from './Member/Member.component';
 
-import { SellCoinToMemberComponent } from './SellCoinToMember/SellCoinToMember.component';
-import { BuyCoinFromMemberComponent } from './BuyCoinFromMember/BuyCoinFromMember.component';
-import { ChargeMemberBalanceComponent } from './ChargeMemberBalance/ChargeMemberBalance.component';
-import { WithdrawMemberBalanceComponent } from './WithdrawMemberBalance/WithdrawMemberBalance.component';
-import { RegisterMemberToBrokerComponent } from './RegisterMemberToBroker/RegisterMemberToBroker.component';
-import { RemoveMemberFromBrokerComponent } from './RemoveMemberFromBroker/RemoveMemberFromBroker.component';
 import {HistoryComponent} from "./History/History.component";
+import {ChargeMemberBalanceComponent} from "./ChargeMemberBalance/ChargeMemberBalance.component";
+import {RegisterMemberToBrokerComponent} from "./RegisterMemberToBroker/RegisterMemberToBroker.component";
+import {SellCoinToMemberComponent} from "./SellCoinToMember/SellCoinToMember.component";
+import {WithdrawMemberBalanceComponent} from "./WithdrawMemberBalance/WithdrawMemberBalance.component";
+import {RemoveMemberFromBrokerComponent} from "./RemoveMemberFromBroker/RemoveMemberFromBroker.component";
+import {BuyCoinFromMemberComponent} from "./BuyCoinFromMember/BuyCoinFromMember.component";
 
   @NgModule({
   declarations: [
@@ -48,12 +48,12 @@ import {HistoryComponent} from "./History/History.component";
     BrokerComponent,
     RegulatorComponent,
     MemberComponent,
-    SellCoinToMemberComponent,
-    BuyCoinFromMemberComponent,
-    ChargeMemberBalanceComponent,
-    WithdrawMemberBalanceComponent,
-    RegisterMemberToBrokerComponent,
-    RemoveMemberFromBrokerComponent
+		SellCoinToMemberComponent,
+		ChargeMemberBalanceComponent,
+		WithdrawMemberBalanceComponent,
+		RegisterMemberToBrokerComponent,
+		RemoveMemberFromBrokerComponent,
+		BuyCoinFromMemberComponent
   ],
   imports: [
     BrowserModule,
