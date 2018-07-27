@@ -14,7 +14,7 @@
 
 'use strict';
 
-const LoopBackCardStore = require('../../lib/loopbackcardstore');
+const LoopBackCardStore = require('../../services/loopbackcardstore');
 
 module.exports = function(app) {
   // Get the Composer configuration.

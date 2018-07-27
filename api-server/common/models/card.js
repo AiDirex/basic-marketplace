@@ -17,8 +17,8 @@
 const AdminConnection = require('composer-admin').AdminConnection;
 const fs = require('fs');
 const IdCard = require('composer-common').IdCard;
-const LoopBackCardStore = require('../../lib/loopbackcardstore');
-const Util = require('../../lib/util');
+const LoopBackCardStore = require('../../services/loopbackcardstore');
+const Util = require('../../services/util');
 
 module.exports = function(Card) {
   /**

@@ -1,6 +1,6 @@
 'use strict';
 
-const Composer = require('../lib/composer.js');
+const Composer = require('../helpers/composer.js');
 
 module.exports = function(BuyCoinFromMember) {
   Composer.restrictModelMethods(BuyCoinFromMember);

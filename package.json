@@ -41,9 +41,10 @@
     "eslint": "latest",
     "mkdirp": "^0.5.1",
     "mocha": "latest",
-    "nyc": "latest"
+    "nyc": "latest",
+    "eslint-config-loopback": "^11.0.0"
   },
   "dependencies": {
-    "eslint-config-loopback": "^11.0.0"
+
   }
 }

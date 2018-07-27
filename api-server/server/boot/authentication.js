@@ -14,16 +14,14 @@
 
 'use strict';
 
-module.exports = function (app) {
-
-    // Enable authentication if the authentication option has been specified.
-    const composer = app.get('composer');
-    if (!composer) {
-        return;
-    }
-    const authentication = !!composer.authentication;
-    if (authentication) {
-        app.enableAuth();
-    }
-
+module.exports = function(app) {
+  // Enable authentication if the authentication option has been specified.
+  const composer = app.get('composer');
+  if (!composer) {
+    return;
+  }
+  const authentication = !!composer.authentication;
+  if (authentication) {
+    app.enableAuth();
+  }
 };

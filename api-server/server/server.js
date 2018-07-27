@@ -24,7 +24,7 @@ const loopback = require('loopback');
 const loopbackPassport = require('loopback-component-passport');
 const path = require('path');
 const session = require('express-session');
-const Util = require('../lib/util');
+const Util = require('../services/util');
 const WebSocket = require('ws');
 
 module.exports = function(composer) {
