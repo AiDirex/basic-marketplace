@@ -16,7 +16,7 @@ namespace net.aidin.marketplace
 
 enum OfferStatus {
 	o NEW
-    o SOLD
+  o SOLD
 }
 
 concept PersonInfo {
