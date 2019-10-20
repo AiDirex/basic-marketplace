@@ -14,7 +14,8 @@ Fabric (blockchain) <- Composer(smart contracts, models, and ACLs) <- API Server
      
 
 # Business Network
-A business network consists of participants, assets, and transactions. Each participant have an issued identity. Participants can use their identity card to interact with the network using the Composer CLI or the client apps. 
+A business network consists of participants, assets, and transactions. Each participant have an issued identity. Participants can use their identity card to interact with the network using the Composer CLI or the client apps.  
+
 Participants should trust the API server if they want to use client applications, because their identity cards should be uploaded to their wallet. Any participant can also interact with the network using Composer CLI if they don't want to trust the API server.
 
 # Installation
