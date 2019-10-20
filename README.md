@@ -1,16 +1,21 @@
 
-A regulated blockchain based marketplace. 
-It is composed of 4 different components. Hyperledger Fabric, Hyperledger Composer, an API server in loopback, and 3 client applications on Angular.  
+This project was a part of my undergraduate [thesis](https://www.researchgate.net/publication/336681219_A_Coin_Marketplace_Implementation_on_Blockchain_Using_the_Hyperledger_Platform).
+
+# A regulated blockchain based marketplace 
+
+This project is composed of four different components. Hyperledger Fabric, Hyperledger Composer, an API server developed with loopback framework, and three client applications developed with Angular framework.  
 * The underlying blockchain is provided by Hyperledger Fabric. 
 * Hyperledgr composer is used for defining the business network, It includes the logic(smart contracts), models, and access controls for different particpants of the network. 
-* An API server developed in loopback for interacting with the network. It provides a full REST API for all of the entities and transactions in the network. It also includes Authentication and a wallet service.
-* 3 client applications developed with Angular for different participants of the entwork. regulator-app, broker-app, member-app.  
+* An API server is developed in loopback for interacting with the network. It provides a full REST API for all of the entities and transactions in the network. It also includes Authentication and a wallet service.
+* three client web applications developed with Angular for different participants of the entwork. regulator-app, broker-app, member-app.  
   
-Fabric <- Composer(smart contracts, models, and ACLs) <- API Server(REST API, Wallet service, Authentication) <- Angular apps  
-Participants should trust the API server if they want to use client applications, because their identity cards should be uploaded to their wallet. Any participant can also interact with the network using Composer CLI if they can't trust the server.
+These four layers are essentially stacked on top of each other and each layer serves a different purpose and enable modularity:  
+Fabric (blockchain) <- Composer(smart contracts, models, and ACLs) <- API Server(REST API, Wallet service, Authentication) <- Web apps(users)  
+     
+Participants should trust the API server if they want to use client applications, because their identity cards should be uploaded to their wallet. Any participant can also interact with the network using Composer CLI if they don't want to trust the API server.
 
-# Network
-The network consists of participants, assets, and transactions. Each participant have an issued identity. Participants can use their identity card to interact with the network using the Composer CLI or the client apps. 
+# Business Network
+A business network consists of participants, assets, and transactions. Each participant have an issued identity. Participants can use their identity card to interact with the network using the Composer CLI or the client apps. 
 
 # Installation
 
