@@ -12,10 +12,10 @@ This project is composed of four different components. Hyperledger Fabric, Hyper
 These four layers are essentially stacked on top of each other and each layer serves a different purpose and enable modularity:  
 Fabric (blockchain) <- Composer(smart contracts, models, and ACLs) <- API Server(REST API, Wallet service, Authentication) <- Web apps(users)  
      
-Participants should trust the API server if they want to use client applications, because their identity cards should be uploaded to their wallet. Any participant can also interact with the network using Composer CLI if they don't want to trust the API server.
 
 # Business Network
 A business network consists of participants, assets, and transactions. Each participant have an issued identity. Participants can use their identity card to interact with the network using the Composer CLI or the client apps. 
+Participants should trust the API server if they want to use client applications, because their identity cards should be uploaded to their wallet. Any participant can also interact with the network using Composer CLI if they don't want to trust the API server.
 
 # Installation
 
