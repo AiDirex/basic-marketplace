@@ -1,7 +1,7 @@
 
 This project was a part of my undergraduate [thesis](https://www.researchgate.net/publication/336681219_A_Coin_Marketplace_Implementation_on_Blockchain_Using_the_Hyperledger_Platform).
 
-# A regulated blockchain based marketplace 
+# A blockchain based marketplace 
 
 This project is composed of four different components. Hyperledger Fabric, Hyperledger Composer, an API server developed with loopback framework, and three client applications developed with Angular framework.  
 * The underlying blockchain is provided by Hyperledger Fabric. 
