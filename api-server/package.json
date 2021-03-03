@@ -40,7 +40,7 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth2": "^0.1.6",
     "passport-local": "1.0.0",
-    "pug": "2.0.0",
+    "pug": "3.0.1",
     "serve-favicon": "2.0.1",
     "strong-error-handler": "1.0.1",
     "touch": "1.0.0",
